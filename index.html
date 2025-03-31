@@ -17,14 +17,14 @@
             gap: 20px;
         }
         .warehouse {
-			position: relative;
-			width: 100vw;
-			height: 70vh;
-			background-color: #fff;
-			border: 2px solid #ddd;
-			border-radius: 8px;
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-			z-index: 1; /* Dodaj tę linię */
+            position: relative;
+            width: 100vw;
+            height: 70vh;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1;
         }
         .shelf {
             width: 150px;
@@ -68,7 +68,8 @@
             font-weight: bold;
         }
         input[type="text"],
-        input[type="number"] {
+        input[type="number"],
+        input[type="url"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -187,87 +188,97 @@
             padding: 6px 10px;
             font-size: 13px;
         }
- 
-		
-
-
-.search-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    top: 10px;
-
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.search-container h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-}
-
-#search {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-#search:focus {
-    outline: none;
-    border-color: #6c757d;
-    box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.25);
-}
-
-#search-results {
-    
-    font-size: 13px;
-    color: #6c757d;
-    padding: 5px;
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-}
-		
-		
+        .allegro-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+        .allegro-link:hover {
+            text-decoration: underline;
+        }
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            top: 10px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .search-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        #search {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        #search:focus {
+            outline: none;
+            border-color: #6c757d;
+            box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.25);
+        }
+        #search-results {
+            font-size: 13px;
+            color: #6c757d;
+            padding: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .allegro-form {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .item-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .item-actions button {
+            padding: 3px 6px;
+            font-size: 12px;
+        }
+        .edit-btn {
+            background-color: #17a2b8;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+        }
     </style>
 </head>
 <body>
     <h1>System zarządzania magazynem</h1>
-    		   <div class="container">
-			<div class="search-container">
-			 <div class="input-group">
-				<h3>Wyszukiwarka</h3>
-				<input type="text" id="search" placeholder="Wpisz nazwę przedmiotu..." onkeyup="searchItem()">
-			
-				</div>
-			
-		
-			
-			<div id="search-results"></div>	</div>
-			</div>	
-			
-		<h3>Magazyn</h3>	
     <div class="container">
-		
-		
-		<div class="warehouse" id="warehouse">
-
-			<div id="search-results"></div>
-		
-		</div>
-		
-		
-		
-		
+        <div class="search-container">
+            <div class="input-group">
+                <h3>Wyszukiwarka</h3>
+                <input type="text" id="search" placeholder="Wpisz nazwę przedmiotu..." onkeyup="searchItem()">
+            </div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+    
+    <h3>Magazyn</h3>
+    <div class="container">
+        <div class="warehouse" id="warehouse">
+            <div id="search-results"></div>
+        </div>
+        
         <div class="controls">
             <div class="input-group">
                 <h3>Dodaj nowy regał</h3>
@@ -280,6 +291,17 @@
                 <button onclick="addShelf()">Dodaj regał</button>
             </div>
             
+            <div class="allegro-form">
+                <h3>Dodaj przedmiot z Allegro</h3>
+                <label for="allegro-url">URL aukcji Allegro:</label>
+                <input type="url" id="allegro-url" placeholder="Wklej link do aukcji Allegro">
+                <button onclick="addItemFromAllegro()">Pobierz dane</button>
+                <div id="allegro-preview" style="margin-top: 10px; display: none;">
+                    <strong>Tytuł aukcji:</strong> <span id="allegro-title"></span><br>
+                    <strong>Dostępna ilość:</strong> <span id="allegro-quantity"></span>
+                </div>
+            </div>
+            
             <div class="import-export">
                 <h3>Import/Export danych</h3>
                 <input type="file" id="import-file" accept=".csv" style="margin-bottom: 12px;">
@@ -289,22 +311,20 @@
             </div>
         </div>
     </div>
-	
+    
     <h3>Lista przedmiotów i stan magazynu</h3>
     <div class="items-container" id="items-container">
-        
         <div id="items-list"></div>
     </div>
     
     <div class="popup" id="popup"></div>
-
-           
 
 <script>
     let shelves = [];
     let searchQuery = '';
     let draggedShelf = null;
     let offsetX, offsetY;
+    let updateIntervals = {};
     
     // Ładowanie danych z localStorage przy starcie
     function loadData() {
@@ -313,6 +333,8 @@
             shelves = JSON.parse(savedData);
             renderShelves();
             updateItemsList();
+            // Przywróć interwały aktualizacji dla przedmiotów z Allegro
+            restoreAllegroIntervals();
         }
     }
     
@@ -418,6 +440,8 @@
             warehouse.appendChild(shelfElement);
         });
     }
+	
+	
 
     // Wyświetlanie przedmiotów w regale po najechaniu
     function showShelfItems(shelf) {
@@ -437,7 +461,15 @@
                 hasItems = true;
                 itemsHtml += `<br><b>${floor}:</b><br>`;
                 for (let item in items) {
-                    itemsHtml += `${item} (${items[item]})<br>`;
+                    const itemData = items[item];
+                    const quantity = typeof itemData === 'object' ? itemData.quantity : itemData;
+                    const url = typeof itemData === 'object' ? itemData.url : null;
+                    
+                    itemsHtml += `${item} (${quantity})`;
+                    if (url) {
+                        itemsHtml += ` <a href="${url}" target="_blank" style="font-size:11px;color:#007bff;">[link]</a>`;
+                    }
+                    itemsHtml += '<br>';
                 }
             }
         }
@@ -450,15 +482,23 @@
         popup.style.display = 'block';
     }
 
+
+
+
+
     // Dodawanie przedmiotu do regału
-    function addItem(shelf) {
-        const itemName = prompt('Podaj nazwę przedmiotu:');
-        if (!itemName) return;
+    function addItem(shelf, itemName = null, quantity = null, url = null, fromAllegro = false) {
+        if (!itemName) {
+            itemName = prompt('Podaj nazwę przedmiotu:');
+            if (!itemName) return;
+        }
         
-        const quantity = parseInt(prompt('Podaj ilość:'));
-        if (isNaN(quantity)) {
-            alert('Podaj poprawną ilość!');
-            return;
+        if (!quantity) {
+            quantity = parseInt(prompt('Podaj ilość:'));
+            if (isNaN(quantity)) {
+                alert('Podaj poprawną ilość!');
+                return;
+            }
         }
         
         // Tworzenie okna wyboru pięter
@@ -527,12 +567,23 @@
             
             checkboxes.forEach(checkbox => {
                 const floor = checkbox.value;
+                const itemData = url ? { quantity: quantity, url: url } : quantity;
+                
                 if (shelf.items[floor][itemName]) {
-                    shelf.items[floor][itemName] += quantity;
+                    if (typeof shelf.items[floor][itemName] === 'object') {
+                        shelf.items[floor][itemName].quantity += quantity;
+                    } else {
+                        shelf.items[floor][itemName] += quantity;
+                    }
                 } else {
-                    shelf.items[floor][itemName] = quantity;
+                    shelf.items[floor][itemName] = itemData;
                 }
             });
+            
+            // Jeśli to przedmiot z Allegro, uruchom cykliczną aktualizację
+            if (fromAllegro && url) {
+                startAllegroItemUpdate(shelf.id, itemName, url);
+            }
             
             updateItemsList();
             saveData();
@@ -581,10 +632,40 @@
                         nameSpan.textContent = item;
                         
                         const quantitySpan = document.createElement('span');
-                        quantitySpan.textContent = items[item];
+                        const quantity = typeof items[item] === 'object' ? items[item].quantity : items[item];
+                        quantitySpan.textContent = quantity;
                         
                         itemDiv.appendChild(nameSpan);
                         itemDiv.appendChild(quantitySpan);
+                        
+                        // Dodaj link do Allegro jeśli istnieje
+                        if (typeof items[item] === 'object' && items[item].url) {
+                            const link = document.createElement('a');
+                            link.href = items[item].url;
+                            link.target = '_blank';
+                            link.className = 'allegro-link';
+                            link.textContent = 'Zobacz na Allegro';
+                            itemDiv.appendChild(link);
+                        }
+                        
+                        // Dodaj przyciski akcji
+                        const actionsDiv = document.createElement('div');
+                        actionsDiv.className = 'item-actions';
+                        
+                        const editBtn = document.createElement('button');
+                        editBtn.className = 'edit-btn';
+                        editBtn.textContent = 'Edytuj';
+                        editBtn.onclick = () => editItem(shelf, floor, item);
+                        
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'delete-btn';
+                        deleteBtn.textContent = 'Usuń';
+                        deleteBtn.onclick = () => deleteItem(shelf, floor, item);
+                        
+                        actionsDiv.appendChild(editBtn);
+                        actionsDiv.appendChild(deleteBtn);
+                        itemDiv.appendChild(actionsDiv);
+                        
                         floorDiv.appendChild(itemDiv);
                     }
                 }
@@ -592,6 +673,68 @@
                 container.appendChild(floorDiv);
             }
         });
+    }
+
+    // Edycja przedmiotu
+    function editItem(shelf, floor, itemName) {
+        const itemData = shelf.items[floor][itemName];
+        const currentQuantity = typeof itemData === 'object' ? itemData.quantity : itemData;
+        
+        const newName = prompt('Nowa nazwa przedmiotu:', itemName);
+        if (newName === null) return;
+        
+        const newQuantity = parseInt(prompt('Nowa ilość:', currentQuantity));
+        if (isNaN(newQuantity)) {
+            alert('Podaj poprawną ilość!');
+            return;
+        }
+        
+        // Jeśli przedmiot zmienia nazwę, musimy go usunąć i dodać na nowo
+        if (newName !== itemName) {
+            delete shelf.items[floor][itemName];
+            
+            if (typeof itemData === 'object') {
+                shelf.items[floor][newName] = {
+                    quantity: newQuantity,
+                    url: itemData.url
+                };
+            } else {
+                shelf.items[floor][newName] = newQuantity;
+            }
+            
+            // Jeśli to przedmiot z Allegro, zaktualizuj interwał
+            if (typeof itemData === 'object' && itemData.url) {
+                clearInterval(updateIntervals[`${shelf.id}-${itemName}`]);
+                delete updateIntervals[`${shelf.id}-${itemName}`];
+                startAllegroItemUpdate(shelf.id, newName, itemData.url);
+            }
+        } else {
+            // Tylko aktualizacja ilości
+            if (typeof itemData === 'object') {
+                shelf.items[floor][itemName].quantity = newQuantity;
+            } else {
+                shelf.items[floor][itemName] = newQuantity;
+            }
+        }
+        
+        updateItemsList();
+        saveData();
+    }
+
+    // Usuwanie przedmiotu
+    function deleteItem(shelf, floor, itemName) {
+        if (confirm(`Czy na pewno chcesz usunąć przedmiot "${itemName}" z ${floor} regału "${shelf.name}"?`)) {
+            // Jeśli to przedmiot z Allegro, zatrzymaj interwał aktualizacji
+            const itemData = shelf.items[floor][itemName];
+            if (typeof itemData === 'object' && itemData.url) {
+                clearInterval(updateIntervals[`${shelf.id}-${itemName}`]);
+                delete updateIntervals[`${shelf.id}-${itemName}`];
+            }
+            
+            delete shelf.items[floor][itemName];
+            updateItemsList();
+            saveData();
+        }
     }
 
     // Funkcje przeciągania regałów
@@ -653,113 +796,104 @@
         saveData();
     }
 
-
-
-
-	   function searchItem() {
-		searchQuery = document.getElementById('search').value.toLowerCase().trim();
-		const resultsDiv = document.getElementById('search-results');
-		resultsDiv.innerHTML = '';
-		
-		// Reset podświetleń wszystkich elementów
-		document.querySelectorAll('.shelf').forEach(el => {
-			el.classList.remove('highlighted');
-		});
-		
-		document.querySelectorAll('.floor-items').forEach(el => {
-			el.classList.remove('hidden-floor');
-		});
-		
-		document.querySelectorAll('.item-entry').forEach(el => {
-			el.classList.remove('highlighted-item');
-		});
-		
-		// Jeśli puste wyszukiwanie - pokaż wszystko
-		if (!searchQuery) {
-			return;
-		}
-		
-		let foundShelves = new Set();
-		let foundItems = 0;
-		
-		// Szukanie przedmiotów
-		shelves.forEach(shelf => {
-			let shelfHasMatches = false;
-			
-			for (let floor in shelf.items) {
-				let floorHasMatches = false;
-				const items = shelf.items[floor];
-				
-				for (let item in items) {
-					if (item.toLowerCase().includes(searchQuery)) {
-						foundShelves.add(shelf.id);
-						foundItems++;
-						shelfHasMatches = true;
-						floorHasMatches = true;
-						
-						// Podświetlenie na liście
-						const itemEntries = document.querySelectorAll(
-							`.item-entry[data-item-name="${item.toLowerCase()}"]`
-						);
-						
-						itemEntries.forEach(el => {
-							if (el.textContent.toLowerCase().includes(searchQuery)) {
-								el.classList.add('highlighted-item');
-							}
-						});
-					}
-				}
-				
-				// Ukryj piętra bez pasujących przedmiotów
-				if (!floorHasMatches) {
-					const floorDivs = document.querySelectorAll(
-						`.floor-items[data-shelf-name="${shelf.name.toLowerCase()}"][data-floor-name="${floor.toLowerCase()}"]`
-					);
-					
-					floorDivs.forEach(el => {
-						el.classList.add('hidden-floor');
-					});
-				}
-			}
-			
-			// Podświetl regały z pasującymi przedmiotami
-			if (shelfHasMatches) {
-				const shelfEl = document.getElementById(shelf.id);
-				if (shelfEl) {
-					shelfEl.classList.add('highlighted');
-				}
-			}
-		});
-		
-		// Wyświetlenie wyników
-		if (foundShelves.size > 0) {
-			resultsDiv.innerHTML = `Znaleziono ${foundItems} przedmiotów na ${foundShelves.size} regałach`;
-		} else {
-			resultsDiv.innerHTML = 'Nie znaleziono przedmiotu';
-			// NIE UKRYWAMY regałów, tylko informujemy o braku wyników
-		}
-	}
-
-
-
-
-
+    function searchItem() {
+        searchQuery = document.getElementById('search').value.toLowerCase().trim();
+        const resultsDiv = document.getElementById('search-results');
+        resultsDiv.innerHTML = '';
+        
+        // Reset podświetleń wszystkich elementów
+        document.querySelectorAll('.shelf').forEach(el => {
+            el.classList.remove('highlighted');
+        });
+        
+        document.querySelectorAll('.floor-items').forEach(el => {
+            el.classList.remove('hidden-floor');
+        });
+        
+        document.querySelectorAll('.item-entry').forEach(el => {
+            el.classList.remove('highlighted-item');
+        });
+        
+        // Jeśli puste wyszukiwanie - pokaż wszystko
+        if (!searchQuery) {
+            return;
+        }
+        
+        let foundShelves = new Set();
+        let foundItems = 0;
+        
+        // Szukanie przedmiotów
+        shelves.forEach(shelf => {
+            let shelfHasMatches = false;
+            
+            for (let floor in shelf.items) {
+                let floorHasMatches = false;
+                const items = shelf.items[floor];
+                
+                for (let item in items) {
+                    if (item.toLowerCase().includes(searchQuery)) {
+                        foundShelves.add(shelf.id);
+                        foundItems++;
+                        shelfHasMatches = true;
+                        floorHasMatches = true;
+                        
+                        // Podświetlenie na liście
+                        const itemEntries = document.querySelectorAll(
+                            `.item-entry[data-item-name="${item.toLowerCase()}"]`
+                        );
+                        
+                        itemEntries.forEach(el => {
+                            if (el.textContent.toLowerCase().includes(searchQuery)) {
+                                el.classList.add('highlighted-item');
+                            }
+                        });
+                    }
+                }
+                
+                // Ukryj piętra bez pasujących przedmiotów
+                if (!floorHasMatches) {
+                    const floorDivs = document.querySelectorAll(
+                        `.floor-items[data-shelf-name="${shelf.name.toLowerCase()}"][data-floor-name="${floor.toLowerCase()}"]`
+                    );
+                    
+                    floorDivs.forEach(el => {
+                        el.classList.add('hidden-floor');
+                    });
+                }
+            }
+            
+            // Podświetl regały z pasującymi przedmiotami
+            if (shelfHasMatches) {
+                const shelfEl = document.getElementById(shelf.id);
+                if (shelfEl) {
+                    shelfEl.classList.add('highlighted');
+                }
+            }
+        });
+        
+        // Wyświetlenie wyników
+        if (foundShelves.size > 0) {
+            resultsDiv.innerHTML = `Znaleziono ${foundItems} przedmiotów na ${foundShelves.size} regałach`;
+        } else {
+            resultsDiv.innerHTML = 'Nie znaleziono przedmiotu';
+        }
+    }
 
     // Export danych do CSV z uwzględnieniem stanu
     function exportData() {
         let csvContent = "data:text/csv;charset=utf-8,";
         
         // Nagłówki kolumn
-        csvContent += "Regał,Pietro,Przedmiot,Ilość,Stan,X,Y\n";
+        csvContent += "Regał,Pietro,Przedmiot,Ilość,URL,X,Y\n";
         
         // Dane
         shelves.forEach(shelf => {
             for (let floor in shelf.items) {
                 for (let item in shelf.items[floor]) {
-                    const quantity = shelf.items[floor][item];
-                    // Dodajemy kolumnę "Stan" - można ją później edytować w Excelu
-                    const status = "W magazynie"; // Domyślny stan
-                    csvContent += `"${shelf.name}","${floor}","${item}",${quantity},"${status}",${shelf.x},${shelf.y}\n`;
+                    const itemData = shelf.items[floor][item];
+                    const quantity = typeof itemData === 'object' ? itemData.quantity : itemData;
+                    const url = typeof itemData === 'object' ? itemData.url : '';
+                    csvContent += `"${shelf.name}","${floor}","${item}",${quantity},"${url}",${shelf.x},${shelf.y}\n`;
                 }
             }
         });
@@ -805,6 +939,7 @@
                 const floor = parts[1].replace(/"/g, '');
                 const item = parts[2].replace(/"/g, '');
                 const quantity = parseInt(parts[3]);
+                const url = parts[4] ? parts[4].replace(/"/g, '') : null;
                 const x = parseFloat(parts[5]);
                 const y = parseFloat(parts[6]);
                 
@@ -845,7 +980,7 @@
                 
                 // Dodajemy przedmiot do odpowiedniego piętra
                 if (shelf.items[floor]) {
-                    shelf.items[floor][item] = quantity;
+                    shelf.items[floor][item] = url ? { quantity: quantity, url: url } : quantity;
                 }
             }
             
@@ -853,6 +988,10 @@
             renderShelves();
             updateItemsList();
             saveData();
+            
+            // Uruchom interwały aktualizacji dla przedmiotów z Allegro
+            restoreAllegroIntervals();
+            
             alert(`Zaimportowano dane z ${newShelves.length} regałami`);
             fileInput.value = '';
         };
@@ -862,6 +1001,12 @@
 
     // Funkcja resetująca wszystkie dane
     function resetAllData() {
+        // Zatrzymaj wszystkie interwały aktualizacji
+        for (let key in updateIntervals) {
+            clearInterval(updateIntervals[key]);
+        }
+        updateIntervals = {};
+        
         shelves = [];
         renderShelves();
         updateItemsList();
@@ -920,6 +1065,231 @@
     window.onload = function() {
         loadData();
     };
+	
+	
+
+async function addItemFromAllegro() {
+    const urlInput = document.getElementById('allegro-url');
+    const url = urlInput.value.trim();
+    const previewDiv = document.getElementById('allegro-preview');
+    const titleElement = document.getElementById('allegro-title');
+    const quantityElement = document.getElementById('allegro-quantity');
+    
+    // Sprawdzenie czy elementy istnieją
+    if (!previewDiv || !titleElement || !quantityElement) {
+        console.error('Brak wymaganych elementów w DOM!');
+        alert('Wystąpił błąd systemu. Odśwież stronę.');
+        return;
+    }
+
+    if (!url) {
+        alert('Wklej link z Allegro!');
+        urlInput.focus();
+        return;
+    }
+
+    // Walidacja URL Allegro
+    if (!url.includes('allegro.pl/')) {
+        alert('To nie jest poprawny link Allegro!');
+        urlInput.focus();
+        return;
+    }
+
+    previewDiv.innerHTML = '<p>Pobieranie danych...</p>';
+    previewDiv.style.display = 'block';
+
+    try {
+        // Pobieranie danych z Allegro (symulacja - w rzeczywistości potrzebne byłoby API)
+        const itemData = await getAllegroData(url);
+        
+        // Wyświetlenie podglądu
+        titleElement.textContent = itemData.title || 'Brak nazwy';
+        quantityElement.textContent = itemData.quantity || '1';
+        
+        // Wybór regału dla przedmiotu
+        selectShelfForAllegroItem(itemData.title, itemData.quantity, url);
+        
+    } catch (error) {
+        console.error('Błąd:', error);
+        previewDiv.innerHTML = `
+            <p style="color:red;">Błąd pobierania danych: ${error.message}</p>
+            <button onclick="addItemManually('${url}')" class="shelf-button">Dodaj ręcznie</button>
+        `;
+    }
+}
+
+// Funkcja symulująca pobieranie danych z Allegro
+async function getAllegroData(url) {
+    // W rzeczywistej implementacji tutaj byłoby połączenie z API Allegro
+    // To jest symulacja - w praktyce potrzebowałbyś:
+    // 1. Klucza API Allegro
+    // 2. Endpointu do pobierania ofert
+    // 3. Autoryzacji
+    
+    return new Promise((resolve, reject) => {
+        // Symulacja opóźnienia sieci
+        setTimeout(() => {
+            try {
+                // Próbujemy wyciągnąć nazwę z URL
+                let title = url.split('/oferta/')[1];
+                if (title) {
+                    title = title.split('-').slice(0, -1).join(' ')
+                                .replace(/-/g, ' ')
+                                .replace(/\d+$/, '');
+                } else {
+                    title = 'Produkt z Allegro';
+                }
+                
+                // Symulowane dane
+                resolve({
+                    title: title.charAt(0).toUpperCase() + title.slice(1),
+                    quantity: 1, // Domyślna ilość
+                    url: url
+                });
+            } catch (e) {
+                reject(new Error('Nie można przetworzyć linku Allegro'));
+            }
+        }, 1000); // Symulowane opóźnienie
+    });
+}
+
+// Funkcja wyboru regału dla przedmiotu z Allegro
+function selectShelfForAllegroItem(itemName, quantity, url) {
+    if (shelves.length === 0) {
+        if (confirm('Nie masz jeszcze żadnych regałów. Czy chcesz dodać nowy regał?')) {
+            document.getElementById('shelf-name').focus();
+            alert('Najpierw dodaj regał, a następnie ponów próbę dodania przedmiotu.');
+        }
+        return;
+    }
+
+    // Wyświetlenie listy regałów do wyboru
+    const shelfList = shelves.map(shelf => 
+        `${shelf.name} (${shelf.levels} pięter)`
+    ).join('\n');
+
+    const shelfChoice = prompt(
+        `Wybierz regał dla przedmiotu "${itemName}" (1-${shelves.length}):\n\n` +
+        shelves.map((shelf, index) => 
+            `${index + 1}. ${shelf.name} (${shelf.levels} pięter)`
+        ).join('\n')
+    );
+
+    if (!shelfChoice) return;
+
+    const shelfIndex = parseInt(shelfChoice) - 1;
+    if (isNaN(shelfIndex) || shelfIndex < 0 || shelfIndex >= shelves.length) {
+        alert('Nieprawidłowy wybór regału!');
+        return;
+    }
+
+    const selectedShelf = shelves[shelfIndex];
+    addItem(selectedShelf, itemName, quantity, url, true);
+}
+
+// Funkcja do ręcznego dodawania przedmiotu z Allegro
+function addItemManually(url) {
+    const defaultName = url.split('/oferta/')[1]?.replace(/-/g, ' ').replace(/\d+$/, '') || 'Produkt z Allegro';
+    const name = prompt('Podaj nazwę produktu:', defaultName);
+    if (!name) return;
+    
+    const quantity = prompt('Podaj ilość:', '1');
+    if (!quantity || isNaN(quantity)) {
+        alert('Podaj poprawną ilość!');
+        return;
+    }
+    
+    selectShelfForAllegroItem(name, parseInt(quantity), url);
+}
+
+// Funkcja rozpoczynająca cykliczną aktualizację stanu przedmiotu z Allegro
+function startAllegroItemUpdate(shelfId, itemName, allegroUrl) {
+    // Najpierw zatrzymujemy istniejący interwał, jeśli jest
+    stopAllegroItemUpdate(shelfId, itemName);
+
+    // Klucz do identyfikacji interwału
+    const intervalKey = `${shelfId}-${itemName}`;
+
+    // Uruchamiamy natychmiastową aktualizację
+    updateAllegroItem(shelfId, itemName, allegroUrl);
+
+    // Ustawiamy cykliczną aktualizację co 30 minut (1800000 ms)
+    updateIntervals[intervalKey] = setInterval(() => {
+        updateAllegroItem(shelfId, itemName, allegroUrl);
+    }, 1800000); // 30 minut
+}
+
+// Funkcja aktualizująca stan przedmiotu z Allegro
+async function updateAllegroItem(shelfId, itemName, allegroUrl) {
+    try {
+        const shelf = shelves.find(s => s.id === shelfId);
+        if (!shelf) {
+            console.error('Regał nie istnieje:', shelfId);
+            return;
+        }
+
+        // Pobieramy aktualne dane z Allegro
+        const itemData = await getAllegroData(allegroUrl);
+        
+        // Szukamy przedmiotu we wszystkich piętrach regału
+        for (const floor in shelf.items) {
+            if (shelf.items[floor][itemName]) {
+                // Aktualizujemy ilość
+                if (typeof shelf.items[floor][itemName] === 'object') {
+                    shelf.items[floor][itemName].quantity = itemData.quantity;
+                } else {
+                    // Jeśli przedmiot był zapisany jako liczba, konwertujemy na obiekt
+                    shelf.items[floor][itemName] = {
+                        quantity: itemData.quantity,
+                        url: allegroUrl
+                    };
+                }
+                
+                // Znaleźliśmy i zaktualizowaliśmy - można przerwać pętlę
+                break;
+            }
+        }
+
+        // Aktualizujemy UI i zapisujemy dane
+        updateItemsList();
+        saveData();
+        
+        console.log(`Zaktualizowano przedmiot ${itemName} w regale ${shelf.name}`);
+    } catch (error) {
+        console.error(`Błąd podczas aktualizacji przedmiotu ${itemName}:`, error);
+    }
+}
+
+// Funkcja zatrzymująca aktualizację przedmiotu
+function stopAllegroItemUpdate(shelfId, itemName) {
+    const intervalKey = `${shelfId}-${itemName}`;
+    if (updateIntervals[intervalKey]) {
+        clearInterval(updateIntervals[intervalKey]);
+        delete updateIntervals[intervalKey];
+    }
+}
+
+// Funkcja przywracająca interwały aktualizacji po załadowaniu strony
+function restoreAllegroIntervals() {
+    // Najpierw czyścimy wszystkie istniejące interwały
+    for (const key in updateIntervals) {
+        clearInterval(updateIntervals[key]);
+        delete updateIntervals[key];
+    }
+
+    // Szukamy przedmiotów z Allegro i uruchamiamy interwały
+    shelves.forEach(shelf => {
+        for (const floor in shelf.items) {
+            for (const itemName in shelf.items[floor]) {
+                const itemData = shelf.items[floor][itemName];
+                if (typeof itemData === 'object' && itemData.url) {
+                    startAllegroItemUpdate(shelf.id, itemName, itemData.url);
+                }
+            }
+        }
+    });
+}
+
 </script>
 </body>
 </html>
